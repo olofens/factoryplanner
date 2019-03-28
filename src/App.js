@@ -1,25 +1,17 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { DragDropContextProvider } from "react-dnd";
+import HTML5Backend from 'react-dnd-html5-backend';
+import Example from "./dndexample.jsx";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <DragDropContextProvider backend={HTML5Backend}>
+					<Example />
+				</DragDropContextProvider>
       </div>
     );
   }
