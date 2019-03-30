@@ -2,18 +2,26 @@ import React, { Component } from 'react'
 import ItemTypes from "./ItemTypes.js"
 import { DragSource } from 'react-dnd'
 
+const styles = {
+  position: 'absolute',
+  fontSize: 25,
+  fontWeight: 'bold',
+  cursor: 'move',
+  display: "inline-block",
+  padding: "5px",
+  border: "solid",
+}
+
 class Constructor extends Component {
+  constructor() {
+    super(...arguments);
+  }
   render() {
+    const { left, top } = this.props;
+    console.log(left + ", " + top);
     return this.props.connectDragSource(
-      <div
-        style={{
-          opacity: this.props.isDragging ? 0.5 : 1,
-          fontSize: 25,
-          fontWeight: 'bold',
-          cursor: 'move',
-        }}
-      >
-        MyConstructor!
+      <div style={Object.assign({}, styles, { left, top, opacity: this.props.isDragging ? 0.5 : 1 })}>
+        <img src="http://satisfactory-planner.epizy.com/Items/Screw.png"></img>
       </div>,
     )
   }
@@ -21,7 +29,8 @@ class Constructor extends Component {
 
 const constructorSource = {
   beginDrag(props) {
-    return {}
+    const { id, left, top } = props
+    return { id, left, top }
   },
 }
 
