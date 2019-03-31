@@ -10,6 +10,8 @@ const styles = {
   display: "inline-block",
   padding: "5px",
   border: "solid",
+  left: 0,
+  top: 0,
 }
 
 class Constructor extends Component {
@@ -18,7 +20,7 @@ class Constructor extends Component {
     console.log(left + ", " + top);
     return this.props.connectDragSource(
       <div style={Object.assign({}, styles, { left, top, opacity: this.props.isDragging ? 0.5 : 1 })}>
-        <img src="/assets/constructor.png"></img>
+        <img src="/assets/constructor.png" alt="Constructor"></img>
       </div>,
     )
   }

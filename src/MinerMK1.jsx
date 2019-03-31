@@ -17,7 +17,7 @@ class MinerMK1 extends Component {
     const { left, top } = this.props;
     return this.props.connectDragSource(
       <div style={Object.assign({}, styles, { left, top, opacity: this.props.isDragging ? 0.5 : 1 })}>
-        <img src="assets/minermk1.png"></img>
+        <img src="assets/minermk1.png" alt="Miner MK1"></img>
       </div>,
     )
   }

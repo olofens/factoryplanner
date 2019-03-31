@@ -14,10 +14,9 @@ class Playground extends Component {
   constructor() {
     super(...arguments)
     this.state = {
-      items: {
-        a: { top: 0, left: 0 },
-        b: { top: 400, left: 400 },
-      }
+      items: [
+
+      ]
     }
   }
   render() {
@@ -25,32 +24,30 @@ class Playground extends Component {
     const { items } = this.state;
     return connectDropTarget(
       <div style={styles}>
-        {Object.keys(items).map(key => {
-          const { left, top } = items[key]
-          return (
-            <Constructor
-              key={key}
-              id={key}
-              left={left}
-              top={top}
-              hideSourceOnDrag={hideSourceOnDrag}
-            />
-          )
-        })}
+        {items.map((item, index) => (
+          <Constructor
+            key={index}
+            id={index}
+            left={item.left}
+            top={item.top}
+            hideSourceOnDrag={hideSourceOnDrag}
+          />))}
       </div>
     );
   }
 
   moveItem(id, left, top) {
-    this.setState(
-      update(this.state, {
-        items: {
-          [id]: {
-            $merge: { left, top },
-          },
-        },
-      }),
-    )
+    console.log(id)
+    var items = [...this.state.items];
+    items[id].top = top;
+    items[id].left = left;
+    this.setState({items});
+  }
+
+  addItem() {
+    var items = [...this.state.items];
+    items.push({ top: 0, left: 0 })
+    this.setState({ items })
   }
 }
 
@@ -62,10 +59,16 @@ export default DropTarget(
         return
       }
       const item = monitor.getItem()
-      const delta = monitor.getDifferenceFromInitialOffset()
-      const left = Math.round(item.left + delta.x)
-      const top = Math.round(item.top + delta.y)
-      component.moveItem(item.id, left, top)
+      console.log(item);
+      if (item.id === undefined) {
+        component.addItem()
+      } else {
+        const delta = monitor.getDifferenceFromInitialOffset()
+        const left = Math.round(item.left + delta.x)
+        const top = Math.round(item.top + delta.y)
+        component.moveItem(item.id, left, top)
+      }
+
     },
   },
   connect => ({

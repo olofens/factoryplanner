@@ -17,7 +17,7 @@ class Smelter extends Component {
     const { left, top } = this.props;
     return this.props.connectDragSource(
       <div style={Object.assign({}, styles, { left, top, opacity: this.props.isDragging ? 0.5 : 1 })}>
-        <img src="assets/smelter.png"></img>
+        <img src="assets/smelter.png" alt="Smelter"></img>
       </div>,
     )
   }
