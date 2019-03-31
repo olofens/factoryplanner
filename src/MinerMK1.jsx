@@ -12,19 +12,18 @@ const styles = {
   border: "solid",
 }
 
-class Constructor extends Component {
+class MinerMK1 extends Component {
   render() {
     const { left, top } = this.props;
-    console.log(left + ", " + top);
     return this.props.connectDragSource(
       <div style={Object.assign({}, styles, { left, top, opacity: this.props.isDragging ? 0.5 : 1 })}>
-        <img src="/assets/constructor.png"></img>
+        <img src="assets/minermk1.png"></img>
       </div>,
     )
   }
 }
 
-const constructorSource = {
+const minermk1Source = {
   beginDrag(props) {
     const { id, left, top } = props
     return { id, left, top }
@@ -38,4 +37,4 @@ function collect(connect, monitor) {
   }
 }
 
-export default DragSource(ItemTypes.CONSTRUCTOR, constructorSource, collect)(Constructor);
+export default DragSource(ItemTypes.MINERMK1, minermk1Source, collect)(MinerMK1);
