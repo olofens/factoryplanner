@@ -3,6 +3,7 @@ import ItemTypes from "./ItemTypes.js";
 import { DropTarget } from "react-dnd";
 import Constructor from "./Constructor.jsx";
 import update from 'immutability-helper';
+import { findDOMNode } from 'react-dom';
 
 const styles = {
   width: 800,
@@ -44,24 +45,30 @@ class Playground extends Component {
     this.setState({items});
   }
 
-  addItem() {
+  addItem(top, left) {
     var items = [...this.state.items];
-    items.push({ top: 0, left: 0 })
+    items.push({ top: top, left: left })
     this.setState({ items })
   }
 }
 
 export default DropTarget(
-  ItemTypes.CONSTRUCTOR,
+  [ItemTypes.CONSTRUCTOR, 
+    ItemTypes.MINERMK1, 
+    ItemTypes.SMELTER],
   {
     drop(props, monitor, component) {
       if (!component) {
         return
       }
+      console.log(monitor.getClientOffset())
       const item = monitor.getItem()
       console.log(item);
       if (item.id === undefined) {
-        component.addItem()
+        var offset = monitor.getClientOffset()
+        const componentRect = findDOMNode(component).getBoundingClientRect()
+        console.log(componentRect)
+        component.addItem(monitor.getClientOffset().y, monitor.getClientOffset().x)
       } else {
         const delta = monitor.getDifferenceFromInitialOffset()
         const left = Math.round(item.left + delta.x)
