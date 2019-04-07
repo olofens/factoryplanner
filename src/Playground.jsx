@@ -46,6 +46,7 @@ class Playground extends Component {
   }
 
   addItem(top, left) {
+    console.log("Adding item at top: " + top + ", left: " + left);
     var items = [...this.state.items];
     items.push({ top: top, left: left })
     this.setState({ items })
@@ -61,14 +62,20 @@ export default DropTarget(
       if (!component) {
         return
       }
-      console.log(monitor.getClientOffset())
       const item = monitor.getItem()
-      console.log(item);
+
       if (item.id === undefined) {
         var offset = monitor.getClientOffset()
         const componentRect = findDOMNode(component).getBoundingClientRect()
-        console.log(componentRect)
-        component.addItem(monitor.getClientOffset().y, monitor.getClientOffset().x)
+        var initSourceOffset = monitor.getInitialSourceClientOffset();
+        var initOffset = monitor.getInitialClientOffset();
+
+        var xDiff = initOffset.x - initSourceOffset.x;
+        var yDiff = initOffset.y - initSourceOffset.y;
+        var xPos = offset.x - xDiff + componentRect.x;
+        var yPos = offset.y - yDiff - componentRect.y;
+        
+        component.addItem(yPos, xPos)
       } else {
         const delta = monitor.getDifferenceFromInitialOffset()
         const left = Math.round(item.left + delta.x)

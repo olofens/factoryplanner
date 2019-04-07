@@ -16,10 +16,10 @@ const styles = {
 
 class Constructor extends Component {
   render() {
-    const { left, top } = this.props;
+    const { left, top, position } = this.props;
     console.log(left + ", " + top);
     return this.props.connectDragSource(
-      <div style={Object.assign({}, styles, { left, top, opacity: this.props.isDragging ? 0.5 : 1 })}>
+      <div style={Object.assign({}, styles, { left, top, opacity: this.props.isDragging ? 0.5 : 1})}>
         <img src="/assets/constructor.png" alt="Constructor"></img>
       </div>,
     )
