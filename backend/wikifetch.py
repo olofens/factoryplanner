@@ -1,6 +1,12 @@
 import requests
 from pprint import pprint
 
+# cool links
+'''
+https://satisfactory.gamepedia.com/Category:Buildings
+https://www.mediawiki.org/wiki/API:Properties
+https://www.mediawiki.org/wiki/API:Images
+'''
 
 def getCats():
     PARAMS = {
