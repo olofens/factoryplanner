@@ -30,6 +30,7 @@ class Playground extends Component {
             key={index}
             id={index}
             left={item.left}
+            position={"absolute"}
             top={item.top}
             hideSourceOnDrag={hideSourceOnDrag}
           />))}
@@ -62,6 +63,7 @@ export default DropTarget(
       if (!component) {
         return
       }
+      
       const item = monitor.getItem()
 
       if (item.id === undefined) {

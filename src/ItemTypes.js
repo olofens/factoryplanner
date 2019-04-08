@@ -4,3 +4,7 @@ export default {
     SMELTER: "smelter", 
     MINERMK1: "minermk1",
   }
+
+export class instances {
+  
+}

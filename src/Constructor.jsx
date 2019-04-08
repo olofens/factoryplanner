@@ -3,7 +3,6 @@ import ItemTypes from "./ItemTypes.js"
 import { DragSource } from 'react-dnd'
 
 const styles = {
-  position: 'relative',
   fontSize: 25,
   fontWeight: 'bold',
   cursor: 'move',
@@ -19,7 +18,7 @@ class Constructor extends Component {
     const { left, top, position } = this.props;
     console.log(left + ", " + top);
     return this.props.connectDragSource(
-      <div style={Object.assign({}, styles, { left, top, opacity: this.props.isDragging ? 0.5 : 1})}>
+      <div style={Object.assign({}, styles, { left, top, position, opacity: this.props.isDragging ? 0.5 : 1})}>
         <img src="/assets/constructor.png" alt="Constructor"></img>
       </div>,
     )

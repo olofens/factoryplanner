@@ -9,13 +9,13 @@ export default class Selection extends Component {
       <div>
         <ul>
           <li>
-            <Constructor />
+            <Constructor position={"relative"}/>
           </li>
           <li>
-            <Smelter />
+          <Smelter position={"relative"}/>
           </li>
           <li>
-            <MinerMK1 />
+          <MinerMK1 position={"relative"}/>
           </li>
         </ul>
       </div>
