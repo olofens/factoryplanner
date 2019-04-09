@@ -52,8 +52,41 @@ def getBuildings():
     members = DATA["query"]["categorymembers"]
     pprint(members)
 
+def getPropsFromPage(pageTitle):
+    PARAMS = {
+        "action": "query",
+        "format": "json",
+        "titles": pageTitle,
+        "prop" : "pageprops"
+    }
+
+    R = S.get(url=URL, params=PARAMS)
+    DATA = R.json()
+
+    pprint(DATA)
+
+def getParseFromPage(pageTitle):
+    PARAMS = {
+        "action": "parse",
+        "format": "json",
+        "page":pageTitle,
+    }
+
+    PARAMS2 = {
+        "action": "parse",
+        "format": "json",
+        "page":pageTitle,
+        "sectiontitle":"Smelting"
+    }
+
+    R = S.get(url=URL, params=PARAMS)
+    DATA = R.json()
+
+    pprint(DATA["parse"]["properties"])
+    #pprint(DATA["parse"]["text"])
+
 
 S = requests.Session()
 
 URL = "https://satisfactory.gamepedia.com/api.php"
-getBuildings()
+getParseFromPage("Smelter")
